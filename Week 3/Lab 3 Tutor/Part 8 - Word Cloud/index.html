@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="">
+    <title>7.8 - Wordclouds</title>
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <nav class="navbar navbar-default"></nav>
+    <svg width="600" height="400"></svg>
+
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+
+    <script>
+
+        var margin = {top: 30, right: 50, bottom: 30, left: 50},
+            width = 600 - margin.left - margin.right,
+            height = 400 - margin.top - margin.bottom;
+
+        var g = d3.select("svg")
+            .append("g")
+                .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+        d3.csv("data/wordcloud.csv").then(function(data) {
+            var color = d3.scaleOrdinal(d3.schemeCategory10);
+
+            var fontSize = d3.scalePow().exponent(5).domain([0,1]).range([40,80]);
+
+            // Adds a set of variables to each element in the data (we will use x and y later)
+            var layout = d3.cloud()
+                .size([width, height])
+                .timeInterval(20)
+                .words(data.map(d => ({text: d.Team_EN}))) // Map data to the required format
+                .rotate(() => ~~(Math.random() * 2) * 90)
+                .fontSize(() => fontSize(Math.random()))
+                .fontWeight("bold")
+                .on("end", draw)
+                .start();
+
+            function draw(words) {
+                var wordcloud = g.append("g")
+                    .attr('class','wordcloud')
+                    .attr("transform", "translate(" + width/2 + "," + height/2 + ")");
+
+                wordcloud.selectAll("text")
+                    .data(words)
+                    .enter().append("text")
+                        .attr('class','word')
+                        .style("fill", (d, i) => color(i))
+                        .style("font-size", d => d.size + "px")
+                        .style("font-family", "sans-serif")
+                        .attr("text-anchor", "middle")
+                        .attr("transform", d => 
+                            `translate(${d.x}, ${d.y}) rotate(${d.rotate})`
+                        )
+                        .text(d => d.text);
+            };
+        });
+
+    </script>
+
+</body>
+</html>

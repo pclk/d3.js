@@ -1,0 +1,272 @@
+#heatmap-container {
+    position: relative;
+}
+
+.tooltip {
+    position: absolute;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.95);
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    pointer-events: none;
+    font-size: 12px;
+    line-height: 1.4;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    z-index: 1000;
+}
+
+.cell {
+    transition: opacity 0.2s ease;
+    cursor: pointer;
+}
+
+.cell:hover {
+    stroke: #000;
+    stroke-width: 1px;
+}
+
+/* Axis styling */
+.x-axis path,
+.y-axis path {
+    stroke: #ccc;
+}
+
+.x-axis line,
+.y-axis line {
+    stroke: #eee;
+}
+
+.x-axis text,
+.y-axis text {
+    font-size: 12px;
+    fill: #666;
+}
+
+/* Legend styling */
+.legend-title {
+    font-size: 12px;
+    fill: #666;
+}
+
+/* Additional interactive elements */
+.heatmap-controls {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+    align-items: center;
+}
+
+.heatmap-controls select,
+.heatmap-controls button {
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background: white;
+    font-size: 14px;
+}
+
+.heatmap-controls select:hover,
+.heatmap-controls button:hover {
+    border-color: #999;
+}
+
+.heatmap-controls {
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 6px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.control-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.control-group label {
+    font-size: 14px;
+    color: #495057;
+    font-weight: 500;
+}
+
+.control-group select,
+.control-group input {
+    padding: 8px 12px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    font-size: 14px;
+    min-width: 150px;
+}
+
+.control-group select[multiple] {
+    height: 100px;
+}
+
+.range-inputs {
+    display: flex;
+    gap: 10px;
+}
+
+.range-inputs input {
+    width: 120px;
+}
+
+.brush-controls {
+  margin-top: 20px;
+}
+
+.control-group {
+  margin-bottom: 20px;
+}
+
+.control-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+#time-brush-container,
+#price-brush-container {
+  background: #f5f5f5;
+  border-radius: 4px;
+  padding: 10px;
+}
+
+button#resetFilters {
+    padding: 8px 16px;
+    background: #6c757d;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+button#resetFilters:hover {
+    background: #5a6268;
+}
+
+/* Add to your heatmap.css */
+.brush-container {
+    margin: 10px 0;
+}
+
+.brush .selection {
+    fill: #69b3a2;
+    fill-opacity: 0.3;
+    stroke: #4a4a4a;
+}
+
+.brush .handle {
+    fill: #4a4a4a;
+}
+
+.brush .overlay {
+    pointer-events: all;
+}
+
+.data-point-marker {
+    pointer-events: none;
+    opacity: 0.5;
+}
+
+.marker-group:hover .data-point-marker {
+    stroke: #000;
+    stroke-width: 2;
+    opacity: 1;
+}
+
+.marker-group:hover .density-indicator {
+    fill: #000;
+    opacity: 0.5;
+}
+
+.density-indicator {
+    pointer-events: none;
+}
+
+.brush .selection {
+  stroke: #000;
+  stroke-width: 1px;
+  fill: rgba(0, 0, 0, 0.1);
+}
+
+.axis-label {
+    font-size: 12px;
+    fill: #666;
+}
+
+.brush-tooltip {
+    position: absolute;
+    pointer-events: none;
+    z-index: 1000;
+}
+
+.brush-tooltip div {
+    background: rgba(0,0,0,0.8);
+    color: white;
+    padding: 5px;
+    border-radius: 3px;
+    font-size: 12px;
+    max-width: 200px;
+    word-wrap: break-word;
+}
+
+.data-point-marker {
+  pointer-events: none;
+}
+
+.marker-group:hover .data-point-marker {
+  stroke: #333;
+  stroke-width: 2;
+}
+
+.brush-tooltip {
+  position: absolute;
+  visibility: hidden;
+  background: rgba(0,0,0,0.8);
+  color: white;
+  padding: 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  pointer-events: none;
+  z-index: 1000;
+  line-height: 1.4;
+  white-space: nowrap;
+}
+
+.brush {
+  will-change: transform;
+}
+
+.data-point-marker {
+  pointer-events: none;
+  will-change: transform;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .heatmap-controls {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .control-group {
+        width: 100%;
+    }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .chart-container {
+        overflow-x: auto;
+    }
+    
+    .heatmap-controls {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
