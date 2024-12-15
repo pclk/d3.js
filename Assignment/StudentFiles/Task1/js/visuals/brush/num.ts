@@ -6,7 +6,7 @@ export interface PriceBrushConfig extends BaseBrushConfig {
   onBrush?: (range: [number, number]) => void;
 }
 
-export class PriceBrush extends BaseBrush<number> {
+export class NumberBrush extends BaseBrush<number> {
   constructor(config: PriceBrushConfig) {
     super(config);
     this.onBrush = config.onBrush || (() => { });

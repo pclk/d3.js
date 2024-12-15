@@ -1,5 +1,5 @@
 import * as d3 from 'd3';
-import { PriceBrush as NumberBrush } from "./num";
+import { NumberBrush as NumberBrush } from "./num";
 import { TimeBrush } from "./time";
 import { DataManager, RangeableKeys } from '../../data';
 import { ChartConfig } from '../base';
@@ -48,3 +48,5 @@ export function NewNumberBrush(
 
   return new NumberBrush(priceBrushConfig);
 }
+
+

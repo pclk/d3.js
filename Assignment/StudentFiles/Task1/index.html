@@ -1,129 +1,123 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="bg-dashboard-background">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Singapore Commercial Property Transactions</title>
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/heatmap.css">
-    <link rel="stylesheet" href="/css/control.css">
 </head>
-<body>
-    <div class="container">
-        <h1>Singapore Commercial Property Transactions</h1>
-        <div class="visualization-container">
-            <div id="loading" class="loading">Loading data...</div>
-        <h2>Global Controls</h2>
-            <div class="global-controls">
-                <div class="global-controls-group">
-                    <!-- Global Range Filters -->
-                    <div class="range-filters">
-                        <h3>Range Filters</h3>
-                        <div class="control-group">
-                            <label for="timeRange">Time Period:</label>
-                            <div id="time-brush-container"></div>
-                            <div class="range-inputs">
-                                <input type="date" id="minDate" class="min-brush-input" placeholder="Min Date">
-                                <input type="date" id="maxDate" class="max-brush-input" placeholder="Max Date">
-                            </div>
-                        </div>
-                        
-                        <div class="control-group">
-                            <label>Price Range:</label>
-                            <div id="price-brush-container"></div>
-                            <div class="range-inputs">
-                                <input type="number" id="minPrice" class="min-brush-input" placeholder="Min Price">
-                                <input type="number" id="maxPrice" class="max-brush-input" placeholder="Max Price">
-                            </div>
-                        </div>
+  <body class="bg-[#17011C] text-gray-200">
+    <div class="container mx-auto px-4 py-8">
+        <h1 class="text-3xl font-bold text-viridis-yellow mb-6">
+            Singapore Commercial Property Transactions
+        </h1>
+        
+        <div class="grid grid-cols-1 gap-6">
+            <div id="loading" class="text-viridis-teal text-center">Loading data...</div>
 
-                                      <div class="control-group">
-                            <label>Area Range:</label>
-                            <div id="area-brush-container"></div>
-                            <div class="range-inputs">
-                                <input type="number" id="minPrice" class="min-brush-input" placeholder="Min Price">
-                                <input type="number" id="maxPrice" class="max-brush-input" placeholder="Max Price">
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <!-- Axis and Grouping Controls -->
-                    <div class="axis-controls">
-                        <h3>Visualization Controls</h3>
-                        <div class="control-group">
-                            <label for="x-axis">X Axis:</label>
-                            <select id="x-axis">
-                                <option value="District Name">District Name</option>
-                                <option value="Sale Date">Sale Date</option>
-                                <option value="Property Type">Property Type</option>
-                                <option value="Tenure Type">Tenure Type</option>
-                            </select>
-                        </div>
-
-                        <div class="control-group">
-                            <label for="y-axis">Y Axis (Value):</label>
-                            <select id="y-axis">
-                                <option value="Transacted Price ($)">Transacted Price</option>
-                                <option value="Area (SQM)">Area</option>
-                                <option value="Unit Price ($ PSM)">Unit Price</option>
-                                <option value="Lease Years">Lease Years</option>
-                            </select>
-                        </div>
-
-                        <div class="control-group">
-                            <label for="group-by">Group By:</label>
-                            <select id="group-by">
-                                <option value="Property Type">Property Type</option>
-                                <option value="District Name">District Name</option>
-                                <option value="Tenure Type">Tenure Type</option>
-                                <option value="Type of Area">Type of Area</option>
-                            </select>
-                        </div>
-                        <div class="control-group">
-                            <button id="reset-filters">Reset All Filters</button>
-                        </div>
-                    </div>
-
-                    </div>
-                </div>
+            <!-- Controls Section -->
+            <div class="bg-viridis-teal bg-opacity-10 rounded-lg shadow-lg p-6 border border-viridis-teal border-opacity-20">
+                <!-- <h2 class="text-xl font-semibold text-viridis-yellow mb-4">Global Controls</h2> -->
+                
+<div class="space-y-6 global-controls"> <!-- Container for both rows -->
+    <!-- First Row: Sliders in 3 columns -->
+    <div class="grid grid-cols-3 gap-4">
+        <!-- Time Range -->
+        <div class="space-y-2">
+            <label class="block text-sm font-medium text-viridis-green">Time Period:</label>
+            <div id="time-brush-container" class="w-full"></div>
+            <div class="flex gap-2">
+                <input type="date" id="minDate" 
+                    class="flex-1 bg-dashboard-background border border-viridis-teal rounded px-3 py-2 text-gray-200 focus:border-viridis-yellow focus:ring-1 focus:ring-viridis-yellow">
+                <input type="date" id="maxDate" 
+                    class="flex-1 bg-dashboard-background border border-viridis-teal rounded px-3 py-2 text-gray-200 focus:border-viridis-yellow focus:ring-1 focus:ring-viridis-yellow">
             </div>
-            <div id="heatmap-container" class="chart-container">
-                <h2>Property Prices Heat Map</h2>
-                <div class="heatmap-controls">
-                    <div class="control-group">
-                        <label for="timeRange">Time Period:</label>
-                        <div id="time-brush-container"></div>
-                        <div class="range-inputs">
-                            <input type="date" id="minDate" class="min-brush-input" placeholder="Min Date">
-                            <input type="date" id="maxDate" class="max-brush-input" placeholder="Max Date">
-                        </div>
-                    </div>
-                    
-                    <div class="control-group">
-                        <label>Price Range:</label>
-                        <div id="price-brush-container"></div>
-                        <div class="range-inputs">
-                            <input type="number" id="minPrice" class="min-brush-input" placeholder="Min Price">
-                            <input type="number" id="maxPrice" class="max-brush-input" placeholder="Max Price">
-                        </div>
-                    </div>
-                    
-                    <div class="control-group">
-                        <label for="view-mode">View Mode:</label>
-                        <select id="view-mode">
-                            <option value="price">Average Price</option>
-                            <option value="transactions">Transaction Count</option>
-                        </select>
-                    </div>
-                    
-                    <div class="control-group">
-                        <button id="resetFilters">Reset Filters</button>
-                    </div>
+        </div>
+
+        <!-- Price Range -->
+        <div class="space-y-2">
+            <label class="block text-sm font-medium text-viridis-green">Price Range:</label>
+            <div id="price-brush-container" class="w-full"></div>
+            <div class="flex gap-2">
+                <input type="number" id="minPrice" 
+                    class="flex-1 bg-dashboard-background border border-viridis-teal rounded px-3 py-2 text-gray-200 focus:border-viridis-yellow focus:ring-1 focus:ring-viridis-yellow">
+                <input type="number" id="maxPrice" 
+                    class="flex-1 bg-dashboard-background border border-viridis-teal rounded px-3 py-2 text-gray-200 focus:border-viridis-yellow focus:ring-1 focus:ring-viridis-yellow">
+            </div>
+        </div>
+
+        <!-- Area Range -->
+        <div class="space-y-2">
+            <label class="block text-sm font-medium text-viridis-green">Area Range:</label>
+            <div id="area-brush-container" class="w-full"></div>
+            <div class="flex gap-2">
+                <input type="number" id="minArea" 
+                    class="flex-1 bg-dashboard-background border border-viridis-teal rounded px-3 py-2 text-gray-200 focus:border-viridis-yellow focus:ring-1 focus:ring-viridis-yellow">
+                <input type="number" id="maxArea" 
+                    class="flex-1 bg-dashboard-background border border-viridis-teal rounded px-3 py-2 text-gray-200 focus:border-viridis-yellow focus:ring-1 focus:ring-viridis-yellow">
+            </div>
+        </div>
+    </div>
+
+    <!-- Second Row: Axis Controls in 3 columns -->
+    <div class="grid grid-cols-3 gap-4">
+        <!-- X Axis -->
+        <div class="space-y-1">
+            <label for="xAxis" class="block text-sm font-medium text-viridis-green">X Axis:</label>
+            <select id="xAxis" 
+                class="w-full bg-dashboard-background border border-viridis-teal rounded px-3 py-2 text-gray-200 focus:border-viridis-yellow focus:ring-1 focus:ring-viridis-yellow">
+                <!-- Options will be populated by JS -->
+            </select>
+        </div>
+
+        <!-- Y Axis -->
+        <div class="space-y-1">
+            <label for="yAxis" class="block text-sm font-medium text-viridis-green">Y Axis:</label>
+            <select id="yAxis" 
+                class="w-full bg-dashboard-background border border-viridis-teal rounded px-3 py-2 text-gray-200 focus:border-viridis-yellow focus:ring-1 focus:ring-viridis-yellow">
+                <!-- Options will be populated by JS -->
+            </select>
+        </div>
+
+        <!-- Group By -->
+        <div class="space-y-1">
+            <label for="thirdAxis" class="block text-sm font-medium text-viridis-green">Group By:</label>
+            <select id="thirdAxis" 
+                class="w-full bg-dashboard-background border border-viridis-teal rounded px-3 py-2 text-gray-200 focus:border-viridis-yellow focus:ring-1 focus:ring-viridis-yellow">
+                <!-- Options will be populated by JS -->
+            </select>
+        </div>
+    </div>
+
+    <!-- Reset Button - Centered below both rows -->
+    <div class="flex justify-center">
+        <button id="reset-filters" 
+            class="bg-viridis-teal hover:bg-viridis-yellow hover:text-[#17011C] text-white font-medium py-2 px-8 rounded transition-colors duration-200">
+            Reset All Sliders
+        </button>
+    </div>
+</div>
+            </div>
+
+            <!-- Charts Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-dashboard-background rounded-lg shadow-lg p-4 border border-viridis-teal border-opacity-20 chart">
+            <h3 class="font-bold" id="heatmap-container-header">Average Price (SGD) per District Name and Property Type</h3>
+                    <div id="heatmap-container"></div>
                 </div>
+                <div class="bg-dashboard-background rounded-lg shadow-lg p-4 border border-viridis-teal border-opacity-20 chart">
+            <h3 class="font-bold" id="scatter-container-header">Time series Price (SGD) (Log) over Sale Date</h3>
+                    <div id="scatter-container"></div>
                 </div>
-            <div id="chart">
-                <h2>Scatter Plot</h2>
+                <div class="bg-dashboard-background rounded-lg shadow-lg p-4 border border-viridis-teal border-opacity-20 chart">
+            <h3 class="font-bold" id="violin-container-header">Distribution of Price (SGD) (Log) over Property Type</h3>
+                    <div id="violin-container"></div>
+                </div>
+                <div class="bg-dashboard-background rounded-lg shadow-lg p-4 border border-viridis-teal border-opacity-20 chart">
+            <h3 class="font-bold" id="bar-container-header">Count of District Name grouped by Property Type</h3>
+                    <div id="bar-container"></div>
+                </div>
             </div>
         </div>
     </div>

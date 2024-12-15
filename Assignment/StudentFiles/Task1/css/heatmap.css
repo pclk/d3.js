@@ -2,18 +2,6 @@
     position: relative;
 }
 
-.tooltip {
-    position: absolute;
-    padding: 10px;
-    background: rgba(255, 255, 255, 0.95);
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    pointer-events: none;
-    font-size: 12px;
-    line-height: 1.4;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    z-index: 1000;
-}
 
 .cell {
     transition: opacity 0.2s ease;
@@ -129,7 +117,8 @@
 }
 
 #time-brush-container,
-#price-brush-container {
+#price-brush-container,
+#area-brush-container{
   background: #f5f5f5;
   border-radius: 4px;
   padding: 10px;
